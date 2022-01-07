@@ -15,7 +15,7 @@ A estrutura de um Node possui tres principais componentes:
 3. Container runtime: Software responsavel por rodar os containers. Docker e' o mais comum container runtime.
 
 
-## Gerenciamento 
+### Gerenciamento 
 
 E' possivel criar Node de duas formas possiveis: O kubelet em um  node self-register no control plane e manualmente por usuario.
 
@@ -50,9 +50,9 @@ Voce pode visualizar todos os Nodes usando o comando ``kubectl get nodes``. Da m
 
 A flag ``-p`` indica uma mudanca de profile do minikube. No caso acima, criamos um novo profile com o nome "multinode-demo". Sempre que seja necessario a execucao de algum comando do minikube que impacta em algum profile especifico que nao seja o default (minikube) e' necessario informar pela flag em qual profile sera executado. Apos a criacao do cluster, o ``kubectl`` ira usar o profile como padrao.
 
-Usaremos o arquivo [hello-deployment.yaml](../code/hello-deployment.yaml) para realizar um deployment que utilize os dois Nodes. Para isso utilizaremos o comando ``kubectl apply -f hello-deployment.yaml``. Podemos notar que serao criadas duas replicas do mesmo deployment. Para que se tenha certeza que os Pods serao criados em Nodes distintos, declaramos na linha 22 do arquivo yaml a propriedade ``PodAntiAffinity`` em conjunto com ``requiredDuringSchedulingIgnoredDuringExecution``. Isso ira dizer para dizer para o Kubernetes apenas aplicar as regras na criacao dos Pods. A propriedade ``labelSelector`` em conjunto com ``matchExpressions`` ira fazer a dinstincao entre um Node e outro, fazendo que as replicas fiquem em Nodes diferentes.
+Usaremos o arquivo [hello-deployment.yaml](https://raw.githubusercontent.com/Numb4r/KubernetesTutorial/master/code/hello-deployment.yaml) para realizar um deployment que utilize os dois Nodes. Para isso utilizaremos o comando ``kubectl apply -f hello-deployment.yaml``. Podemos notar que serao criadas duas replicas do mesmo deployment. Para que se tenha certeza que os Pods serao criados em Nodes distintos, declaramos na linha 22 do arquivo yaml a propriedade ``PodAntiAffinity`` em conjunto com ``requiredDuringSchedulingIgnoredDuringExecution``. Isso ira dizer para dizer para o Kubernetes apenas aplicar as regras na criacao dos Pods. A propriedade ``labelSelector`` em conjunto com ``matchExpressions`` ira fazer a dinstincao entre um Node e outro, fazendo que as replicas fiquem em Nodes diferentes.
 
-Podemos usar o arquivo [hello-svc.yaml](../code/hello-svc.yaml) para fazer um deploy de um servico que ira dividir as requisicoes IP feita pelo server entre os dois Nodes. Aplicamos o arquivo [hello-svc.yaml](../code/hello-svc.yaml) pelo comando ``kubectl apply -f hello-svc.yaml``. Checamos o IP fornecido por esse servico pelo comando ``minikube service list -p multinode-demo`` 
+Podemos usar o arquivo [hello-svc.yaml](https://raw.githubusercontent.com/Numb4r/KubernetesTutorial/master/code/hello-svc.yaml) para fazer um deploy de um servico que ira dividir as requisicoes IP feita pelo server entre os dois Nodes. Aplicamos o arquivo [hello-svc.yaml](https://raw.githubusercontent.com/Numb4r/KubernetesTutorial/master/code/hello-svc.yaml) pelo comando ``kubectl apply -f hello-svc.yaml``. Checamos o IP fornecido por esse servico pelo comando ``minikube service list -p multinode-demo`` 
 
 ![minikube service list -p multinode-demo](https://raw.githubusercontent.com/Numb4r/KubernetesTutorial/master/images/2022-01-06_15:36:24.png)
 
