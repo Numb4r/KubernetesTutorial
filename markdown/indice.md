@@ -5,5 +5,6 @@ Esse manual utilizara o docker como formar de conternalizacao e o minikube como 
 ## Sumario
 
 * [Nodes](#nodes)
-* []()
-* []()
+* [ConfigMaps](#configmaps)
+* [Persistent Volumes](#persistent-volumes)
+* [Rollback de Deployment](#rollback-de-deployment)
