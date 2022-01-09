@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO</title>
+   
+    <!-- JQuery if needed -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      
+      
+    
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        form {
+            /* margin: 10%; */
+            width: 400px;
+            /* margin: 10% 40%; */
+        }
+
+        .container {
+            margin: 10% 30%;
+        }
+
+        textarea {
+            height: 300px;
+        }
+    </style>
+
+
+    <!-- Here is a script where we will be collecting data from the form  -->
+    
+
+</head>
+
+<body>
+    
+        
+
+<% if (data) { 
+    var d = data;
+    d.forEach((i)=>{ %>
+        <p>
+            <%= i.name %> 
+            <%= i.description %>
+    </p>
+        <% 
+    })} %>
+                
+            <h1>Nova Tarefa</h1>
+    <form action="/novatarefa" method="POST">
+        <p><label for="none">Nome:</label></p>
+            <input type="text" name="name" id="nome" class="form-control" placeholder="Nome nova tarefa">
+        <p><label for="">descricao:</label></p>
+            <input type="text" id="description" name="description" class="form-control" placeholder="descricao">
+        <br>
+        <button type="submit" class="btn btn-success">Criar categoria</button>
+  
+
+  
+    
+</body>
+
+</html>
