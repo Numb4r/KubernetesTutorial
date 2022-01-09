@@ -76,15 +76,15 @@ Iremos reproduzir o mesmo cenário do exemplo utilizando o Minikube, dois Nodes 
 <!-- [port fowarding](../images/2022-01-03_17:32:39.png) -->
 
 
-Com as VMs instaladas e já configuradas, vamos ao processo de instalação do contêiner runtime e de todas as ferramentas necessárias para a execução do Kubernetes. Esse processo de instalação deve ser feito em todas as VMs. Como container runtime iremos utilizar o Docker. Para a instalacao do Docker basta executar ``curl -fsSL http://get.docker.com | sh`` no seu Shell de preferência. Ja as ferramentas do Kubernetes iremos utilizar o kubelet, kubeadm e kubectl. Para isso, basta executar o [script]() de instalação ou ``curl -fsSL link.com | sh``. Por fim, é necessário desativar a memória SWAP já que Kubernetes não trabalha com ela e podem ocorrer erros na manipulação de Pods. Para desativar o SWAP execute o comando ``sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab && sudo reboot``.
+Com as VMs instaladas e já configuradas, vamos ao processo de instalação do contêiner runtime e de todas as ferramentas necessárias para a execução do Kubernetes. Esse processo de instalação deve ser feito em todas as VMs. Como container runtime iremos utilizar o Docker. Para a instalacao do Docker basta executar ``curl -fsSL http://get.docker.com | sh`` no seu Shell de preferência. Ja as ferramentas do Kubernetes iremos utilizar o kubelet, kubeadm e kubectl. Para isso, basta executar o [script](https://raw.githubusercontent.com/Numb4r/KubernetesTutorial/master/code/scriptkube.sh) de instalação ou ``curl -fsSL link.com | sh``. Por fim, é necessário desativar a memória SWAP já que Kubernetes não trabalha com ela e podem ocorrer erros na manipulação de Pods. Para desativar o SWAP execute o comando ``sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab && sudo reboot``.
  
 Depois de instalado as ferramentas, iremos configurar o Master e gerar o token de conexão. Para iniciar o control plane, utilize o comando ``kubeadm init`` como usuário root. O kubeadm irá gerar um token que será necessário para realizar a ligação entre o Master e os Workers.
  
  
-[kubeadm init devolvendo o token](../images/2022-01-08_18:52:16.png)
+![kubeadm init devolvendo o token](https://github.com/Numb4r/KubernetesTutorial/blob/master/images/2022-01-08_18:52:16.png?raw=true)
  
 Agora precisamos configurar o ``kubectl`` para acessar esse cluster criado. Para isso, o próprio comando ``kubeadm init`` nos dá a sequencia de comandos necessários:
-```
+```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -93,12 +93,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
  
 Agora é possível conferir que foi criado um Node pelo comando ``kubectl get nodes``
  
-![kubectl get nodes](../images/2022-01-08_18:58:59.png)
+![kubectl get nodes](https://github.com/Numb4r/KubernetesTutorial/blob/master/images/2022-01-08_18:58:59.png?raw=true)
  
 Por fim, precisamos configurar um CNI (Container Network Interface) para que ocorra a  conexão entre os Pods. O Cluster DNS não irá funcionar até que um CNI seja inserido.
  
-```
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```bash
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(\
+                  kubectl version | base64 | tr -d '\n')"
 ```
  
 Após isso, o Node Master irá entrar em estado "Ready" e podemos configurar os outros Nodes.
@@ -106,7 +107,7 @@ Após isso, o Node Master irá entrar em estado "Ready" e podemos configurar os 
 Nas outras VMs, precisaremos realizar um port forwarding na porta 6443 para que seja possível a comunicação com o cluster. Utilizaremos a porta 6443.
 Depois de configurado, executaremos o comando fornecido pelo ```kubeadm init`` para a adição dos Nodes ao cluster.
  
-```
+```bash
 kubeadm join ip:port --token token \
        --discovery-token-ca-cert-hash sha256:hashtoken
 ```
@@ -121,13 +122,13 @@ Após adicionados, é possível ver os Nodes pelo comando ``kubectl get nodes``.
 #### kubeadmn init nao inicializa por um erro do kubelet
  
 Crie um documento no diretório /etc/docker/daemon.json e dentro coloque:
-```
+```javascript
 {
    "exec-opts": ["native.cgroupdriver=systemd"]
 }
 ```
 Após isso, reinicie os serviços do docker e do kubelet.
-```
+```bash
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 sudo systemctl restart kubelet
