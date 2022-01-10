@@ -8,3 +8,4 @@ Esse manual utilizara o docker como formar de conternalizacao e o minikube como 
 * [ConfigMaps](#configmaps)
 * [Persistent Volumes](#persistent-volumes)
 * [Rollback de Deployment](#rollback-de-deployment)
+* [Referências Bibliográficas](#referências-bibliográficas)

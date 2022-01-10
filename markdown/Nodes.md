@@ -65,7 +65,7 @@ Com isso, podemos fazer uma requisição para o IP fornecido e verificar quais o
  
 Podemos ver que o Kubernetes acessa mais de um Node durante as requisições. Isso é feito com o intuito de balanceamento de carga.
 
-## Criando um Cluster Multi-Node (Kubeadm)
+### Criando um Cluster Multi-Node (Kubeadm)
 
 Embora seja muito útil, a ferramenta Minikube é focada apenas em desenvolvimento e testes de forma local, não sendo recomendada a utilização em um ambiente real de uma aplicação. Para uma aplicação em produção, iremos utilizar a ferramenta ``Kubeadm``.
  
