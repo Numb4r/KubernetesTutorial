@@ -22,7 +22,6 @@ Um ConfigMap é um objeto da API que permite o armazenamento de configurações 
 ## Criando um ConfigMap
 Um ConfigMap pode ser criado de várias formas, abaixo abordamos as várias maneiras de se criar os ConfigMaps utilizando exemplos: 
 - Criando um ConfigMap com kubectl create configmap   
-        
     Use o comando ``kubectl create configmap`` para criar ConfigMaps de diretórios, arquivos ou valores literais:
     ```
     kubectl create configmap <map-name> <data-source>
@@ -31,8 +30,8 @@ Um ConfigMap pode ser criado de várias formas, abaixo abordamos as várias mane
     Quando você cria um ConfigMap com base em um arquivo, a chave em ``<data-source>`` é associada ao nome do arquivo e o valor associado ao conteúdo do arquivo. 
     
 - Criando ConfigMaps a partir de diretórios 
-
-  Você pode usar o comando ``kubectl create configmap`` para criar um ConfigMap a partir de vários arquivos no mesmo diretório. Quando você está criando um ConfigMap com base em um diretório, o kubectl identifica os arquivos cujo nome de base é uma chave válida no diretório e empacota cada um desses arquivos no novo ConfigMap. Quaisquer entradas de diretório, exceto arquivos regulares, são ignoradas (por exemplo, subdiretórios, links simbólicos, dispositivos, canais, etc).
+    
+    Você pode usar o comando ``kubectl create configmap`` para criar um ConfigMap a partir de vários arquivos no mesmo diretório. Quando você está criando um ConfigMap com base em um diretório, o kubectl identifica os arquivos cujo nome de base é uma chave válida no diretório e empacota cada um desses arquivos no novo ConfigMap. Quaisquer entradas de diretório, exceto arquivos regulares, são ignoradas (por exemplo, subdiretórios, links simbólicos, dispositivos, canais, etc).
   Por Exemplo:
   ```
    # Create the local directory
@@ -66,7 +65,7 @@ Um ConfigMap pode ser criado de várias formas, abaixo abordamos as várias mane
 
 
 - Criando ConfigMaps a partir de arquivos
-
+  
   Você também pode usar o comando ``kubectl create configmaps`` para criar um ConfigMap de um arquivo individual ou de múltiplos arquivos.
   Por exemplo:
   ```
@@ -127,7 +126,7 @@ Um ConfigMap pode ser criado de várias formas, abaixo abordamos as várias mane
     ![part1](https://user-images.githubusercontent.com/55333375/148653319-a8fab412-a4e2-4a71-b7d6-73bc2a7177b9.png)
 
 - Criando ConfigMaps a partir de valores literais
-
+  
   Você pode usar kubectl create configmap com o argumento --from-literal para definir um valor literal na linha de comando:
     ```
     kubectl create configmap special-config --from-literal=special.how=very --from-literal=special.type=charm
@@ -139,6 +138,7 @@ Um ConfigMap pode ser criado de várias formas, abaixo abordamos as várias mane
     ![part1](https://user-images.githubusercontent.com/55333375/148653330-f9219a07-e1e4-4f74-8e1b-d103ad3048dc.png)
 
 - Criando ConfigMaps a partir de um gerador
+    
     O ``kubectl`` suporta ``kustomization.yaml`` desde a v1.14. Você também pode criar um ConfigMap a partir de geradores e então aplicá-lo para criar o objeto no Apiserver. Os geradores devem ser especificados em um ``kustomization.yaml`` dentro de um diretório.
     ### Gerando ConfigMaps de arquivos
     Por exemplo, para gerar um ConfigMap a partir dos arquivos ``configure-pod-container/configmap/game.properties``
