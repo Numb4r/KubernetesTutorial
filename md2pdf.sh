@@ -20,7 +20,7 @@ pandoc -f markdown ${ARRAY[@]} metadata.yaml -s -t html -o $TMP/main.html
 
 sed -i '/<header id="title-block-header">/,/<\/header>/d' $TMP/main.html # Comentar essa linha se for gerar um html 
 
-pandoc -f html $TMP/main.html --pdf-engine=xelatex -V colorlinks -t latex  -o $OUTPUT/main.pdf
+pandoc -f html $TMP/main.html --pdf-engine=xelatex --highlight-style espresso -V colorlinks -V geometry:a4paper -V geometry:margin=1cm -t latex  -o $OUTPUT/main.pdf
 
 
 # ls $TARGET | grep .md | cut -d . -f 1 | xargs -t -I {} pandoc -f markdown $TARGET/{}.md -s -t html -o $TMP/{}.html
