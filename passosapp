@@ -1,2 +1,0 @@
-Inicia um cluster com 2 nodes
-minikube start --nodes 2 -p nodeapp 
