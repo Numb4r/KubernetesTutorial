@@ -1,7 +1,7 @@
 const mysql = require('mysql')
 const express = require("express")
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 const path = require('path')
 const ejs = require("ejs")
 const bodyParser = require("body-parser")
@@ -10,9 +10,9 @@ const log = console.log
 
 var pool        = mysql.createPool({
     connectionLimit : 10,
-    host            : 'localhost',
+    host            : process.env.MYSQL_HOST,
     user            : 'root',
-    password        : 'jade12',
+    password        : process.env.MYSQL_ROOT_PASSWORD,
     database        : 'TODO'
 });
 app.set('view engine', 'html');
