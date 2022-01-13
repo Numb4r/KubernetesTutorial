@@ -1,7 +1,7 @@
 const mysql = require('mysql')
 const express = require("express")
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 const path = require('path')
 const ejs = require("ejs")
 const bodyParser = require("body-parser")
@@ -51,7 +51,7 @@ app.get("/", (req,res)=>{
 
     })
 
-}) 
+})
 app.listen(port,()=>{
     log('Example app listening at http://localhost:'+port)
 })
